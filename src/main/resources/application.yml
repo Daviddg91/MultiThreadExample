@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  kafka:
+    consumer:
+      group-id: group-1
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      enable-auto-commit: false
+      topic: "transaction-1"
+    listener:
+      ack-mode: manual
+    concurrency: 1
+    partitions: 1
+
