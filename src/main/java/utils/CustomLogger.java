@@ -14,15 +14,15 @@ public class CustomLogger {
 		FileHandler fh;
 
 		try {
-			String filePath = new File("").getAbsolutePath();
+			String filePath = new File("").getAbsolutePath()+"\\";
 			
-			fh = new FileHandler(filePath+"/customLogFile.log");
+			fh = new FileHandler(filePath+"customLogFile.log", true);
 			logger.addHandler(fh);
 			SimpleFormatter formatter = new SimpleFormatter();
 			fh.setFormatter(formatter);
 
 			logger.info(msg);
-
+			fh.close();
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (IOException s) {

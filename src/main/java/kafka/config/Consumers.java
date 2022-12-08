@@ -29,10 +29,6 @@ public class Consumers {
 	{
 	    Map<String, Object> props = new HashMap<>();
 	    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, env.getProperty("spring.kafka.consumer.bootstrap-servers"));
-//	    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-//	    		JsonSerializer.class);
-//	    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-//	    		StringDeserializer.class);
 	    props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 	    props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-1");
 
@@ -45,68 +41,69 @@ public class Consumers {
 	{
 	    ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 	    factory.setConsumerFactory(consumerFactory1());
-	    factory.setConcurrency(Integer.valueOf(env.getProperty("spring.kafka.concurrency")));
+	    factory.setConcurrency(Integer.valueOf(env.getProperty("spring.kafka.listener.concurrency")));
 	    
 	    factory.getContainerProperties().setAckMode(AckMode.MANUAL);
 
 	    return factory;
 	}
 	
-//	//consumer 2
-//	
-//	@Bean
-//	public ConsumerFactory<String, Object> consumerFactory2()
-//	{
-//	    Map<String, Object> props = new HashMap<>();
-//	    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, env.getProperty("spring.kafka.consumer.bootstrap-servers"));
-//	    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-//	    		StringSerializer.class);
-//	    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-//	    		JsonSerializer.class);
-//	    props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-2");
-//	    
-//	    return new DefaultKafkaConsumerFactory<>(props);
-//	}
-//
-//
-//	@Bean
-//	public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory2()
-//	{
-//	    ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-//	    factory.setConsumerFactory(consumerFactory2());
-//	    factory.setConcurrency(Integer.valueOf(env.getProperty("spring.kafka.concurrency")));
-//	    factory.getContainerProperties().setAckMode(AckMode.MANUAL_IMMEDIATE);
-//
-//	    return factory;
-//	}
-//	
-//	//consumer 3
-//	
-//	@Bean
-//	public ConsumerFactory<String, Object> consumerFactory3()
-//	{
-//	    Map<String, Object> props = new HashMap<>();
-//	    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, env.getProperty("spring.kafka.consumer.bootstrap-servers"));
-//	    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-//	    		StringSerializer.class);
-//	    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-//	    		JsonSerializer.class);
-//	    props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-3");
-//	    
-//	    return new DefaultKafkaConsumerFactory<>(props);
-//	}
-//
-//
-//	@Bean
-//	public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory3()
-//	{
-//	    ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-//	    factory.setConsumerFactory(consumerFactory3());
-//	    factory.setConcurrency(Integer.valueOf(env.getProperty("spring.kafka.concurrency")));
-//	    factory.getContainerProperties().setAckMode(AckMode.MANUAL_IMMEDIATE);
-//
-//	    return factory;
-//	}
+	//consumer 2
+	
+	@Bean
+	public ConsumerFactory<String, Object> consumerFactory2()
+	{
+	    Map<String, Object> props = new HashMap<>();
+	    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, env.getProperty("spring.kafka.consumer.bootstrap-servers"));
+	    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
+		StringDeserializer.class);
+props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
+		StringDeserializer.class);
+	   	props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-1");
+	   	props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+	    return new DefaultKafkaConsumerFactory<>(props);
+	}
+
+
+	@Bean
+	public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory2()
+	{
+	    ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+	    factory.setConsumerFactory(consumerFactory2());
+	    factory.setConcurrency(Integer.valueOf(env.getProperty("spring.kafka.listener.concurrency")));
+	    factory.getContainerProperties().setAckMode(AckMode.MANUAL_IMMEDIATE);
+
+	    return factory;
+	}
+	
+	//consumer 3
+	
+	@Bean
+	public ConsumerFactory<String, Object> consumerFactory3()
+	{
+	    Map<String, Object> props = new HashMap<>();
+	    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, env.getProperty("spring.kafka.consumer.bootstrap-servers"));
+	    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
+		StringDeserializer.class);
+	    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
+		StringDeserializer.class);
+		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+	    props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-1");
+	    
+	    return new DefaultKafkaConsumerFactory<>(props);
+	}
+
+
+	@Bean
+	public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory3()
+	{
+	    ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+	    factory.setConsumerFactory(consumerFactory3());
+	    factory.setConcurrency(Integer.valueOf(env.getProperty("spring.kafka.listener.concurrency")));
+	    factory.getContainerProperties().setAckMode(AckMode.MANUAL_IMMEDIATE);
+
+	    return factory;
+	}
 	
 	
 }

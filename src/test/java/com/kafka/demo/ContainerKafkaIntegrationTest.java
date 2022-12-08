@@ -40,10 +40,10 @@ import org.testcontainers.utility.DockerImageName;
 @ActiveProfiles("test")
 public class ContainerKafkaIntegrationTest {
 
-	    private static final DockerImageName KAFKA_TEST_IMAGE = DockerImageName.parse("confluentinc/cp-kafka:6.2.1");
+	    private static final DockerImageName KAFKA_TEST_IMAGE = DockerImageName.parse("confluentinc/cp-kafka:7.3.0");
 
 	    private static final DockerImageName ZOOKEEPER_TEST_IMAGE = DockerImageName.parse(
-	        "confluentinc/cp-zookeeper:4.0.0"
+	        "confluentinc/cp-zookeeper:7.3.0"
 	    );
 
 	    @Test

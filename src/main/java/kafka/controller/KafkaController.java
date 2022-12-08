@@ -36,12 +36,10 @@ public class KafkaController {
  
 		Gson gson = new Gson();
 		String jsonObject = gson.toJson(emailGenerate);
-		
-//		for (int i = 0; i < 30; i++) {
+		System.out.println("comienza a enviar mensajes");
+		for (int i = 0; i < 10; i++) {
 			this.kafkaTemplate.send(env.getProperty("spring.kafka.consumer.topic"), jsonObject);
-//		 	}
-//		this.kafkaTemplate.send("transaction-2", new Account(account.getHolder(), account.getFunds()));
-//		this.kafkaTemplate.send("transaction-3", new Account(account.getHolder(), account.getFunds()));
+		 	}
 
 		return "Hello World!";
 	}
