@@ -26,6 +26,8 @@ public class Consumers {
 	public ConsumerFactory<String, Object> consumerFactory1() {
 		Map<String, Object> props = new HashMap<>();
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, env.getProperty("spring.kafka.consumer.bootstrap-servers"));
+		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-1");
 
@@ -74,9 +76,8 @@ public class Consumers {
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, env.getProperty("spring.kafka.consumer.bootstrap-servers"));
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-1");
-
+		props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 		return new DefaultKafkaConsumerFactory<>(props);
 	}
 
@@ -89,5 +90,4 @@ public class Consumers {
 
 		return factory;
 	}
-
 }

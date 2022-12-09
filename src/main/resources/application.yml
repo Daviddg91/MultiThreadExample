@@ -3,7 +3,7 @@ server:
 spring:
   kafka:
     bootstrap-servers: broker:9092
-    partitions: 20
+    partitions: 6
     consumer:
       group-id: group-1
       auto-offset-reset: earliest
@@ -13,5 +13,5 @@ spring:
     listener:
       ack-mode: manual
       concurrency: 100
-
-
+ 
+    

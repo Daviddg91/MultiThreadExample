@@ -23,7 +23,7 @@ public class TopicListeners {
 
 	CustomLogger logger = new CustomLogger();
 
-	@KafkaListener(topics = "#{'${spring.kafka.consumer.topic}'}", containerFactory = "kafkaListenerContainerFactory3")
+	@KafkaListener(topics = "#{'${spring.kafka.consumer.topic}'}", containerFactory = "kafkaListenerContainerFactory1")
 	public void receiveMessages1(ConsumerRecord<?, ?> consumerRecord, Acknowledgment acknowledgment,
 			@Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
 
