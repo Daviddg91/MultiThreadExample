@@ -14,9 +14,9 @@ public class CustomLogger {
 		FileHandler fh;
 
 		try {
-			String filePath = new File("").getAbsolutePath()+"\\";
-			
-			fh = new FileHandler(filePath+"customLogFile.log", true);
+			String filePath = new File("").getAbsolutePath() + "\\";
+
+			fh = new FileHandler(filePath + "customLogFile.log", true);
 			logger.addHandler(fh);
 			SimpleFormatter formatter = new SimpleFormatter();
 			fh.setFormatter(formatter);
@@ -29,7 +29,6 @@ public class CustomLogger {
 			s.printStackTrace();
 		}
 
-		
 	}
 
 }

@@ -1,13 +1,13 @@
 # Proyecto kafka dockerizado con envio de mensajes a logger a traves de un controlador
 
-Api Rest links(este enlace envia 10 mensajes a traves del topico:
+Api Rest links(este enlace envia 100 mensajes a traves del topico:
 -------------------------------------------------------------------
-POST: localhost:8080/api/kafka
+GET: localhost:8080/api/kafka
 
 
 El fichero de log se genera en el directorio root del proyecto:
 -------------------------------------------------------------------
-./demo
+./demo/customLogFile.log
 
 Valores de concurrencia(subprocesos):
 --------------------------------------

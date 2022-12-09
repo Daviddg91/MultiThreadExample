@@ -15,74 +15,60 @@ import com.google.gson.Gson;
 import kafka.model.Email;
 import utils.CustomLogger;
 
-
- 
 @Component
-public class TopicListeners  {
-	
+public class TopicListeners {
+
 	@Autowired
 	Environment env;
-	
-	
-	CustomLogger logger = new CustomLogger();
-	
 
-	@KafkaListener( topics = "#{'${spring.kafka.consumer.topic}'}",
-					containerFactory = "kafkaListenerContainerFactory3" )
-			public void receiveMessages1(ConsumerRecord<?, ?> consumerRecord,  
-	        Acknowledgment acknowledgment , @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer ) {
- 
-		
+	CustomLogger logger = new CustomLogger();
+
+	@KafkaListener(topics = "#{'${spring.kafka.consumer.topic}'}", containerFactory = "kafkaListenerContainerFactory3")
+	public void receiveMessages1(ConsumerRecord<?, ?> consumerRecord, Acknowledgment acknowledgment,
+			@Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
+
 		Gson gson = new Gson();
 		Email email = gson.fromJson(consumerRecord.value().toString(), Email.class);
-		
+
 		String msg = email.genMessage();
 		String emailMsg = email.getEmail();
 		String consumerMember = consumer.groupMetadata().memberId();
-		
-		logger.logInFile("consumidor1: " + consumerMember + "mensaje: "+msg + "email: " +emailMsg);
-		
-		System.out.println("aqui llegan , 1 ");
+
+		logger.logInFile("consumidor1: " + consumerMember + "mensaje: " + msg + "email: " + emailMsg);
+
 		acknowledgment.acknowledge();
 	}
-	
- 
-	@KafkaListener( topics = "#{'${spring.kafka.consumer.topic}'}",
-			containerFactory = "kafkaListenerContainerFactory2" )
-	public void receiveMessages2(ConsumerRecord<?, ?> consumerRecord,  
-    Acknowledgment acknowledgment , @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer ) {
 
+	@KafkaListener(topics = "#{'${spring.kafka.consumer.topic}'}", containerFactory = "kafkaListenerContainerFactory2")
+	public void receiveMessages2(ConsumerRecord<?, ?> consumerRecord, Acknowledgment acknowledgment,
+			@Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
 
-	Gson gson = new Gson();
-	Email email = gson.fromJson(consumerRecord.value().toString(), Email.class);
-	
-	String msg = email.genMessage();
-	String emailMsg = email.getEmail();
-	String consumerMember = consumer.groupMetadata().memberId();
-	
-	logger.logInFile("consumidor2: " + consumerMember + "mensaje: "+msg + "email: " +emailMsg);
+		Gson gson = new Gson();
+		Email email = gson.fromJson(consumerRecord.value().toString(), Email.class);
 
-		System.out.println("aqui llegan , 2 ");
-acknowledgment.acknowledge();
-}
-	@KafkaListener( topics = "#{'${spring.kafka.consumer.topic}'}",
-			containerFactory = "kafkaListenerContainerFactory3" )
-	public void receiveMessages3(ConsumerRecord<?, ?> consumerRecord,  
-    Acknowledgment acknowledgment , @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer ) {
+		String msg = email.genMessage();
+		String emailMsg = email.getEmail();
+		String consumerMember = consumer.groupMetadata().memberId();
 
+		logger.logInFile("consumidor2: " + consumerMember + "mensaje: " + msg + "email: " + emailMsg);
 
-Gson gson = new Gson();
-Email email = gson.fromJson(consumerRecord.value().toString(), Email.class);
+		acknowledgment.acknowledge();
+	}
 
-String msg = email.genMessage();
-String emailMsg = email.getEmail();
-String consumerMember = consumer.groupMetadata().memberId();
+	@KafkaListener(topics = "#{'${spring.kafka.consumer.topic}'}", containerFactory = "kafkaListenerContainerFactory3")
+	public void receiveMessages3(ConsumerRecord<?, ?> consumerRecord, Acknowledgment acknowledgment,
+			@Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
 
-logger.logInFile("consumidor3: " + consumerMember + "mensaje: "+msg + "email: " +emailMsg);
+		Gson gson = new Gson();
+		Email email = gson.fromJson(consumerRecord.value().toString(), Email.class);
 
-System.out.println("aqui llegan , 3 ");
-acknowledgment.acknowledge();
-}
+		String msg = email.genMessage();
+		String emailMsg = email.getEmail();
+		String consumerMember = consumer.groupMetadata().memberId();
 
- 
+		logger.logInFile("consumidor3: " + consumerMember + "mensaje: " + msg + "email: " + emailMsg);
+
+		acknowledgment.acknowledge();
+	}
+
 }
