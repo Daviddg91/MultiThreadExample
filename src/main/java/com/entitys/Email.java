@@ -1,12 +1,11 @@
-package kafka.model;
+package com.entitys;
+
 
 import java.io.Serializable;
-import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
-import utils.RandomString;
+import com.utils.RandomString;
 
 public class Email implements Serializable{
 

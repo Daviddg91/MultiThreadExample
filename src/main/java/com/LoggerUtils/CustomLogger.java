@@ -1,4 +1,4 @@
-package utils;
+package com.LoggerUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,8 +7,11 @@ import java.util.logging.Logger;
 
 import org.springframework.boot.logging.java.SimpleFormatter;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 public class CustomLogger {
 
+	@CircuitBreaker(name = "logInFile", fallbackMethod = "logInFileFallback")
 	public void logInFile(String msg) {
 		Logger logger = Logger.getLogger("MyLog");
 		FileHandler fh;
